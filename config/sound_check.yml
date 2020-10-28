@@ -1,0 +1,6 @@
+Experimental:
+  samplerate: 48000
+  speaker-1: 0
+  speaker-2: 1
+  Hz-1: 440
+  Hz-2: 880

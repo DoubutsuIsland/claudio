@@ -1,0 +1,8 @@
+Comport:
+  port: "/dev/ttyACM0"
+  baudrate: 115200
+  dotino: "./ino/proto.ino"
+  warmup: 2.0
+
+Experimental:
+  solenoid: 12

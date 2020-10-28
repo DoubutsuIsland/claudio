@@ -1,0 +1,21 @@
+Comport:
+  port: "/dev//ttyACM0"
+  baudrate: 115200
+  dotino: "./ino/proto.ino"
+  warmup: 2.0
+
+Experimental:
+  cs-duration: 1.0
+  Hz: 6000
+  samplerate: 48000
+  speaker: 0
+  us: 12
+  us-duration: 0.01
+  mean-iti: 3.0
+  range-iti: 0.0
+  trial: 10
+  lick: 7
+
+Metadata:
+  subject: "sub-01"
+  condition: "cs01-iti15"

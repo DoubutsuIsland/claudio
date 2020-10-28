@@ -1,0 +1,22 @@
+Comport:
+  port: "/dev//ttyACM1"
+  baudrate: 115200
+  dotino: "./ino/proto.ino"
+  warmup: 2.0
+
+Experimental:
+  cs-duration: 0.05
+  Hz: 440
+  amplifer: 1.0
+  samplerate: 48000
+  speaker: 3
+  us: 12
+  us-duration: 0.065
+  mean-iti: 0.25
+  range-iti: 0.0
+  trial: 1000
+  lick: 7
+
+Metadata:
+  subject: "calibration"
+  condition: "none"
