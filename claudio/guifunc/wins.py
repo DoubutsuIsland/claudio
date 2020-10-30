@@ -4,7 +4,7 @@ import glob
 import os
 from datetime import datetime
 
-def set_yml_widow(yaml_path: str) -> dict:
+def set_config(yaml_path: str) -> dict:
     global x, y
     ymlPath = glob.glob(yaml_path)
     ymlFile = [os.path.basename(i) for i in ymlPath]
@@ -52,7 +52,7 @@ def set_yml_widow(yaml_path: str) -> dict:
     return config
 
 
-def set_filename_window(config: dict) -> str:
+def set_filename(config: dict) -> str:
     global x, y
     cols = []
     chamber = config['chamber']

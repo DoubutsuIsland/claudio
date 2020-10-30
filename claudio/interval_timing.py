@@ -17,19 +17,6 @@ def packing(event: int) -> Tuple[float, int]:
     return (perf_counter(), event)
 
 
-#def init_trials(var: dict) -> List[float]:
-#    mean = var.get("mean-iti")
-#    _range = var.get("range-iti")
-#    trial = var.get("trial", 0)
-#    if mean < _range or trial < 1:
-#        raise ValueError
-#    d = 2 * _range
-#    e = _range / trial
-#    _min = mean - _range
-#    itis = [(_min + (step * d / trial)) + e for step in range(trial)]
-#    shuffle(itis)
-#    return itis
-
 def make_pure_tone(amp: float, freq: int, samplerate: int,
                    t: float) -> np.ndarray:
     return amp * np.sin(2.0 * np.pi * freq * np.arange(samplerate * t) /
@@ -96,9 +83,6 @@ async def stimulate(agent: Agent, ino: Arduino, beep: Callable,
 
             if trial == 0:
                 await agent.sleep(interval - us_duration)
-                #agent.send_to(RECORDER, packing(cs))
-                #beep()
-                #await agent.sleep(cs_duration)
             elif trial == 1:
                 await agent.sleep(random.randint(
                         interval * 3, interval * 3 + 20 - us_duration
@@ -174,21 +158,8 @@ if __name__ == '__main__':
     from amas.connection import Register
     from guifunc import wins
 
-    config = wins.set_yml_widow('./config/gui/*.yml')
-
-    #SAMPLERATE = expvars.get("samplerate")
-    #cs_duration = expvars.get("cs-duration")
-    #freq = expvars.get("Hz")
-    #amp = expvars.get("amplifer", 10.0)
-    #cs = make_pure_tone(amp, freq, SAMPLERATE, cs_duration)
-    #sd.default.device = expvars.get("speaker")
-    #sound = set_speaker(cs, samplerate=SAMPLERATE)
-
-    #meta = config.get_metadata()
-    #sub = meta.get("subject")
-    #cond = meta.get("condition")
-
-    filename = wins.set_filename_window(config)
+    config = wins.set_config('./config/gui/*.yml')
+    filename = wins.set_filename(config)
 
     expvars = config.get_experimental()
 
@@ -207,7 +178,7 @@ if __name__ == '__main__':
     ino.set_pinmode(lick, SSINPUT_PULLUP)
 
     stimulator = Agent(STIMULATOR)
-    stimulator.assign_task(stimulate, ino=ino, beep=sound, var=expvars) \
+    stimulator.assign_task(stimulate, ino=ino, beep=None, var=expvars) \
         .assign_task(watch)
 
     reader = Agent(READER)
