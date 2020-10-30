@@ -2,6 +2,7 @@ from pino.config import Config
 import PySimpleGUI as sg
 import glob
 import os
+from datetime import datetime
 
 def set_yml_widow(yaml_path: str) -> dict:
     global x, y
