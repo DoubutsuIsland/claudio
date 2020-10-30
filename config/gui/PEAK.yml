@@ -1,0 +1,18 @@
+Comport:
+  arduino: "arduino"
+  port: "/dev//ttyACM0"
+  baudrate: 115200
+  dotino: "./ino/proto.ino"
+  warmup: 2.0
+
+Experimental:
+  schedule: "PEAK"
+  us: 12
+  us-duration: 0.065
+  interval: 10
+  trial: 250
+  lick: 10
+
+Metadata:
+  subject: "sub-07"
+  condition: "cs01-iti19-saline"

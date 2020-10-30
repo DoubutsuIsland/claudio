@@ -1,0 +1,22 @@
+Comport:
+  port: "/dev//ttyACM0"
+  baudrate: 115200
+  dotino: "./ino/proto.ino"
+  warmup: 2.0
+
+Experimental:
+  cs-duration: 1.0
+  Hz: 6000
+  amplifer: 1.0
+  samplerate: 48000
+  speaker: 3
+  us: 12
+  us-duration: 0.065
+  mean-iti: 5.0
+  range-iti: 0.0
+  trial: 120
+  lick: 7
+
+Metadata:
+  Box_1: "COM5"
+  Box_2: "COM3"
