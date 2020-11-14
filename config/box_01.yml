@@ -9,13 +9,13 @@ Experimental:
   Hz: 6000
   amplifer: 1.0
   samplerate: 48000
-  speaker: 3
+  speaker: 6
   us: 12
   us-duration: 0.065
   mean-iti: 5.0
   range-iti: 0.0
-  trial: 120
-  lick: 7
+  trial: 150
+  lick: 10
 
 Metadata:
   subject: "sub-07"
