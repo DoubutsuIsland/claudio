@@ -19,7 +19,7 @@ def packing(event: int) -> Tuple[float, int]:
 def init_iti(var: dict) -> List[float]:
     mean = var.get("mean-iti")
     _range = var.get("range-iti")
-    trial = var.get("trial", 0)
+    trial = int(var.get("trial", 0) / 2)
     if mean < _range or trial < 1:
         raise ValueError
     d = 2 * _range
@@ -51,10 +51,34 @@ async def stimulate(agent: Agent, ino: Arduino, beep: Callable,
     us_duration = var.get("us-duration")
     cs_duration = expvars.get("cs-duration")
     intervals = init_iti(var)
+    intervals1 = init_iti(var)
+    intervals2 = init_iti(var)
     agent.send_to(RECORDER, (perf_counter(), 0))
     try:
         count = 0
         for interval in intervals:
+            count += 1
+            await agent.sleep(interval)
+            agent.send_to(RECORDER, packing(cs))
+            beep()
+            await agent.sleep(cs_duration)
+            ino.digital_write(us, HIGH)
+            await agent.sleep(us_duration)
+            ino.digital_write(us, LOW)
+            agent.send_to(RECORDER, packing(us))
+            print(count)
+
+        for interval in intervals1:
+            count += 1
+            await agent.sleep(interval)
+            agent.send_to(RECORDER, packing(cs))
+            beep()
+            await agent.sleep(cs_duration)
+            await agent.sleep(us_duration)
+            agent.send_to(RECORDER, packing(-1 * us))
+            print(count)
+
+        for interval in intervals2:
             count += 1
             await agent.sleep(interval)
             agent.send_to(RECORDER, packing(cs))
@@ -128,6 +152,7 @@ if __name__ == '__main__':
     from amas.env import Environment
     from amas.connection import Register
     from datetime import datetime
+    from os import path
 
     config = clap.PinoCli().get_config()
     expvars = config.get_experimental()
