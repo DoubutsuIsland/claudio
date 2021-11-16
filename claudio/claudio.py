@@ -128,6 +128,9 @@ if __name__ == '__main__':
     from amas.env import Environment
     from amas.connection import Register
     from datetime import datetime
+    ###上追加
+    from os import path
+
 
     config = clap.PinoCli().get_config()
     expvars = config.get_experimental()
@@ -146,16 +149,17 @@ if __name__ == '__main__':
     lick = expvars.get("lick")
 
     now = datetime.now().strftime("%y-%m-%d-%H-%M")
-    #sub = meta.get("subject")
-    #cond = meta.get("condition")
-    #filename = f"{now}_{sub}_{cond}.csv"
-    filepath = path.splitext(path.basename(__file__))[0]
-    filename = input("Set filename: ")
-    filename = filename + f"{filepath}_{now}.csv"
+    sub = meta.get("subject")
+    cond = meta.get("condition")
+    filename = f"{now}_{sub}_{cond}.csv"
+    #filepath = path.splitext(path.basename(__file__))[0]
+    #filename = input("Set filename: ")
+    #filename = filename + f"{filepath}_{now}.csv"
 
     com = Comport() \
         .apply_settings(config.get_comport()) \
         .set_timeout(2.0) \
+        .set_arduino("arduino") \
         .deploy() \
         .connect()
 
